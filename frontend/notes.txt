@@ -12,10 +12,15 @@ npm i nodemon -D
 5000 -> This site can’t be reached
 localhost refused to connect.
 
-4> git github
+4> git github 1st commit
 git init 
 git add .
 git commit -m "first commit"
 $ git remote add origin https://github.com/Kamal-Kothari/Chat-App.git
 git branch -M main
 git push -u origin main
+
+5> next commit
+git add .
+git commit -m "update"
+git push 
