@@ -1,0 +1,5 @@
+PS C:\Users\Kamal\OneDrive\Desktop\vs\mern\AsAProg\mern\chat-app> cd .\frontend\
+npm create vite@latest .
+npm install
+npm run dev 
+
