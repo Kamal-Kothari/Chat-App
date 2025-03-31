@@ -1,5 +1,21 @@
-PS C:\Users\Kamal\OneDrive\Desktop\vs\mern\AsAProg\mern\chat-app> cd .\frontend\
+1> PS C:\Users\Kamal\OneDrive\Desktop\vs\mern\AsAProg\mern\chat-app> cd .\frontend\
 npm create vite@latest .
 npm install
 npm run dev 
 
+2> PS C:\Users\Kamal\OneDrive\Desktop\vs\mern\AsAProg\mern\chat-app\backend> npm init -y
+npm i express mongoose dotenv jsonwebtoken bcryptjs cookie-parser cloudinary socket.io
+npm i nodemon -D
+
+3> port on 5001
+5001 -> cannot get / , on port where server running, 
+5000 -> This site can’t be reached
+localhost refused to connect.
+
+4> git github
+git init 
+git add .
+git commit -m "first commit"
+$ git remote add origin https://github.com/Kamal-Kothari/Chat-App.git
+git branch -M main
+git push -u origin main
