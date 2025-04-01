@@ -24,3 +24,6 @@ git push -u origin main
 git add .
 git commit -m "update"
 git push 
+git add . && git commit -m "Update code" && git push 
+
+6> 
