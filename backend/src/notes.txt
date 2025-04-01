@@ -1,0 +1,17 @@
+1>
+import authRoutes from './routes/auth.route.js'; // .js needed for local imports
+
+2> mongoDb
+create new project , add db user, get uri
+MONGO_URI=.mongodb.net/chat_db?retryWrites=true&w=majority&appName=Cluster0
+db name before ?
+async await for db connect as it will take time 
+Network Access : allow Access from anywhere 0.0.0.0
+clusters/browse collection
+
+3> path
+/c/Users/Kamal/OneDrive/Desktop/vs/mern/AsAProg/mern/chat-app
+
+4> signup
+get all fields => fullName, email(unique), password(>6 chars)
+create user, generate token, set cookie

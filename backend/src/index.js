@@ -6,6 +6,8 @@ dotenv.config(); // Load environment variables from .env file
 import { connectDB } from './lib/db.js'; // Import the connectDB function
 
 const app = express();
+app.use(express.json()); // Middleware to parse JSON request bodies
+// app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded request bodies
 
 app.use('/api/auth',authRoutes)
 
