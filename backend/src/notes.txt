@@ -15,3 +15,7 @@ clusters/browse collection
 4> signup
 get all fields => fullName, email(unique), password(>6 chars)
 create user, generate token, set cookie
+
+5> login
+always await for db operations , and password check with bcrypt
+

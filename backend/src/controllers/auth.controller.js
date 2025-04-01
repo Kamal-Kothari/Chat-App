@@ -47,16 +47,46 @@ export const signup = async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: 'Internal server error' });
+        return res.status(500).json({ message: 'Internal server error in signup' });
 
     }
 
 
 
 }
-export const login = (req, res) => {
-    res.send('User login route');
+export const login = async (req, res) => {
+    try {
+        const {email,password} = req.body;
+        if(!email || !password){
+            return res.status(400).json({ message: 'All fields are required' });
+        }
+        const user = await User.findOne({ email });
+        if(!user){
+            return res.status(400).json({ message: 'Invalid credentials!' });
+        }
+        const isMatch = await bcrypt.compare(password, user.password);
+        if(!isMatch){
+            return res.status(400).json({ message: 'Invalid credentials!!' });
+        }
+        //generate token
+        generateToken(user._id, res);
+        res.status(200).json({
+            _id: user._id,
+            fullName: user.fullName,
+            email: user.email,
+            profilePic: user.profilePic,
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Internal server error in login' });
+    }
 }
 export const logout = (req, res) => {
-    res.send('User logout route');
+    try {
+        res.clearCookie('jwt');
+        res.status(200).json({ message: 'Logout successful' });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Internal server error in logout' });
+    }
 }
