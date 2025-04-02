@@ -19,3 +19,18 @@ create user, generate token, set cookie
 5> login
 always await for db operations , and password check with bcrypt
 
+6> 
+export const getMessages => import {getMessages}
+export default getMessages => import anyName
+
+7> ./ current folder ../ parent folder 
+
+8> query
+        const users = await User.find({_id : {$ne : req.user._id}}).select('-password');
+
+        const messages = await Message.find({
+            $or : [
+                {senderId : userId, receiverId : otherUserId},
+                {senderId : otherUserId, receiverId : userId}
+            ],
+        })
