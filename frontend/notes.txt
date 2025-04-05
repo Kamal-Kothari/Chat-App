@@ -27,3 +27,6 @@ git push
 git add . && git commit -m "Update code" && git push 
 
 6> 
+\frontend> npm i react-router-dom react-hot-toast
+tailwind v3 for vite 
+daisyui v4.12.23
