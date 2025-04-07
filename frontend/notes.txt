@@ -162,3 +162,5 @@ const keyword = searchParams.get('q');
 <Route path="*" element={<NotFound />} />
 
 10. Lazy Loading Routes
+
+16> sticky navbar instead of fixed (in fixed next element gets bit overlap as navbar is taken out of flow)
