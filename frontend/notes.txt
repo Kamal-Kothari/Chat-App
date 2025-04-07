@@ -30,3 +30,135 @@ git add . && git commit -m "Update code" && git push
 \frontend> npm i react-router-dom react-hot-toast
 tailwind v3 for vite 
 daisyui v4.12.23
+
+7> jsx
+element={<h1>Home</h1>}
+Use {} to embed JavaScript expressions inside JSX. In this case, we are embedding a JSX element (<h1>Home</h1>) as a JavaScript expression.
+
+JSX requires {} when:
+
+You're passing anything other than a string.
+
+You're passing a component, a function call, a variable, or JSX itself.
+
+8> nested routing
+    // no / in profile hence child of dash, else root level
+    // profile correct, /profile incorrect
+    <Routes>
+      <Route path="/" element={<Home />} />
+
+      <Route path="/dashboard" element={<Dashboard />}>
+        <Route path="profile" element={<Profile />} />
+        <Route path="settings" element={<Settings />} />
+      </Route>
+    </Routes>
+
+    <div>
+      <h1>Dashboard</h1>
+      <nav className="flex gap-4">
+        <Link to="profile">Profile</Link>
+        <Link to="settings">Settings</Link>
+      </nav>
+      
+      {/* This is where nested routes will render */}
+      <Outlet />
+    </div>
+
+9> zustand best practice
+useUserStore()	Entire store	❌ Can cause unnecessary re-renders
+useUserStore((state) => state.user)	Just user	✅ Efficient
+useUserStore((state) => ({ user: state.user, setUser: state.setUser }))	Only what's needed	✅ Best practice
+
+10> return object
+() => {} arrow function
+() => ({}) arrow function will return an object
+
+11> create and set 
+The result of create() is a custom React hook (useUserStore) that gives access to your store.
+The function setUser, which when called, triggers a state update.
+
+12>
+When you make a request using Axios (like axios.get()), Axios returns a response object that looks like this:
+
+{
+  data: {},         // <-- This is the actual response body from the server
+  status: 200,
+  statusText: "OK",
+  headers: {},
+  config: {},
+  request: {}
+}
+So yes, res.data always holds the response payload—i.e., what your backend sends using res.json(...) or res.send(...) in Express.
+
+13> cors error cross-origin requests
+Access to XMLHttpRequest at 'http://localhost:5001/api/auth/check' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+origin = protocol://domain:port
+two different origins , backend does not allow req from frontend unless we mention using cors middleware
+http://localhost:5173 → Vite (frontend)
+http://localhost:5001 → Express (backend)
+
+14>
+console.log(authUser)
+kamal
+console.log({ authUser }) //It’s useful for debugging because it shows the variable name and value.
+{ authUser: 'kamal' }
+
+15> react-router-dom 
+1. Basic Routing 
+import { BrowserRouter, Routes, Route } 
+
+2. nested routing
+<Route path="/dashboard" element={<Dashboard />}>
+  <Route path="profile" element={<Profile />} />
+  <Route path="settings" element={<Settings />} />
+</Route>
+Use <Outlet /> inside Dashboard to render nested components.
+
+3. navigation (direct in ui through click)
+import { Link, NavLink } from 'react-router-dom';
+
+<Link to="/about">About</Link>
+<NavLink to="/about" className={({ isActive }) => isActive ? 'active' : ''}>About</NavLink>
+//NavLink knows if the link is currently "active" (i.e., if the current route matches the to prop).
+
+4. Programmatic Navigation inside code (after submit form, after successful login, etc)
+import { useNavigate } from 'react-router-dom';
+
+const navigate = useNavigate();
+navigate('/login');
+
+import { useNavigate } from 'react-router-dom';
+
+const Login = () => {
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    // login logic here...
+    navigate('/dashboard'); // redirect after success
+  };
+
+  return <button onClick={handleLogin}>Login</button>;
+};
+
+5. Redirect
+import { Navigate } from 'react-router-dom';
+
+<Route path="/" element={user ? <Home /> : <Navigate to="/login" />} />
+
+6. Access Route Params
+import { useParams } from 'react-router-dom';
+
+const { id } = useParams(); // for route /user/:id
+
+7. Read Query Params
+import { useSearchParams } from 'react-router-dom';
+
+const [searchParams] = useSearchParams();
+const keyword = searchParams.get('q');
+
+8. Custom Private Route
+
+9. 404 Route (Not Found)
+<Route path="*" element={<NotFound />} />
+
+10. Lazy Loading Routes
