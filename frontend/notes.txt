@@ -164,3 +164,12 @@ const keyword = searchParams.get('q');
 10. Lazy Loading Routes
 
 16> sticky navbar instead of fixed (in fixed next element gets bit overlap as navbar is taken out of flow)
+
+17>
+{" "}
+
+In JSX, line breaks and spaces don’t automatically render. {" "} ensures there's a visible space between the text and the link.
+
+Already have an account?
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  Each &nbsp; is one space. So 4 of them give roughly a tab space.
