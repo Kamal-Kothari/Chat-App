@@ -371,3 +371,22 @@ const Form = () => {
 
 export default Form;
 
+21> ways to implement profile pic update
+base64 upload - for small files with quick preview
+FormData - for large files 
+
+22> hide file input and show camera icon, htmlFor matches with id avatar-upload or wrap input inside label
+<label
+    htmlFor="avatar-upload"
+    className={``}
+>
+    <Camera className="w-5 h-5 text-base-200" />
+    <input
+        type="file"
+        id="avatar-upload"
+        className="hidden"
+        accept="image/*"
+        onChange={handleImageUpload}
+        disabled={isUpdatingProfile}
+    />
+</label>
