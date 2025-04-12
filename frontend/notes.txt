@@ -173,3 +173,201 @@ In JSX, line breaks and spaces don’t automatically render. {" "} ensures there
 Already have an account?
   &nbsp;&nbsp;&nbsp;&nbsp;
   Each &nbsp; is one space. So 4 of them give roughly a tab space.
+
+18> dynamic key
+const handleChange = (e) => {
+  setFormData({ ...formData, [e.target.name]: e.target.value });
+};
+
+19> input field component to avoid repetition
+import React from "react";
+
+const InputField = ({
+  label,
+  placeholder,
+  value,
+  onChange,
+  type = "text", // Default type is text, but you can change it for different types like 'email' or 'password'
+  icon: Icon = null, // Option to add an icon
+}) => {
+  return (
+    <div className="form-control">
+      <label className="label">
+        <span className="label-text font-medium">{label}</span>
+      </label>
+      <div className="relative">
+        {Icon && (
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <Icon className="size-5 text-base-content/40" />
+          </div>
+        )}
+        <input
+          type={type}
+          className={`input input-bordered w-full ${Icon ? "pl-10" : ""}`}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default InputField;
+
+import React, { useState } from "react";
+import { User, Mail, Lock } from "react-feather"; // Icons for user, mail, and lock
+import InputField from "./InputField"; // Path to your InputField component
+
+const CreateAccountForm = () => {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  return (
+    <form>
+      {/* Full Name */}
+      <InputField
+        label="Full Name"
+        placeholder="John Doe"
+        value={formData.fullName}
+        onChange={handleChange}
+        name="fullName"
+        icon={User} // Icon for Full Name
+      />
+
+      {/* Email */}
+      <InputField
+        label="Email"
+        placeholder="example@example.com"
+        value={formData.email}
+        onChange={handleChange}
+        name="email"
+        type="email" // Email input type
+        icon={Mail} // Icon for Email
+      />
+
+      {/* Password */}
+      <InputField
+        label="Password"
+        placeholder="********"
+        value={formData.password}
+        onChange={handleChange}
+        name="password"
+        type="password" // Password input type
+        icon={Lock} // Icon for Password
+      />
+
+      <button type="submit" className="btn btn-primary w-full mt-4">
+        Create Account
+      </button>
+    </form>
+  );
+};
+
+export default CreateAccountForm;
+
+20> show password toggle 
+import { useState } from "react";
+import { Lock, Eye, EyeOff } from "react-feather"; // Import icons, assuming you're using react-feather for icons
+
+const InputField = ({
+  label,
+  type = "text",
+  value,
+  onChange,
+  placeholder = "",
+  icon = <Lock className="size-5 text-base-content/40" />,
+  showPasswordToggle = false,
+}) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handlePasswordToggle = () => {
+    setShowPassword(!showPassword);
+  };
+
+  return (
+    <div className="form-control">
+      <label className="label">
+        <span className="label-text font-medium">{label}</span>
+      </label>
+      <div className="relative">
+        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          {icon}
+        </div>
+        <input
+          type={showPasswordToggle && showPassword ? "text" : type}
+          className="input input-bordered w-full pl-10"
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+        />
+        {showPasswordToggle && (
+          <button
+            type="button"
+            className="absolute inset-y-0 right-0 pr-3 flex items-center"
+            onClick={handlePasswordToggle}
+          >
+            {showPassword ? (
+              <EyeOff className="size-5 text-base-content/40" />
+            ) : (
+              <Eye className="size-5 text-base-content/40" />
+            )}
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default InputField;
+
+import { useState } from "react";
+import InputField from "./InputField"; // Import the reusable component
+
+const Form = () => {
+  const [formData, setFormData] = useState({
+    password: "",
+    fullName: "",
+    email: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  return (
+    <form>
+      <InputField
+        label="Full Name"
+        value={formData.fullName}
+        onChange={handleChange}
+        placeholder="John Doe"
+      />
+      <InputField
+        label="Email"
+        value={formData.email}
+        onChange={handleChange}
+        placeholder="johndoe@example.com"
+        type="email"
+      />
+      <InputField
+        label="Password"
+        value={formData.password}
+        onChange={handleChange}
+        placeholder="••••••••"
+        type="password"
+        showPasswordToggle={true}
+      />
+    </form>
+  );
+};
+
+export default Form;
+
