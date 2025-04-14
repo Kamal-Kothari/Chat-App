@@ -405,3 +405,13 @@ FormData - for large files
               `}
                             onClick={() => setTheme(t)}
                         >
+25>
+{PREVIEW_MESSAGES.map((message) => (
+                                        <div
+                                            key={message.id}
+                                            className={`flex ${message.isSent ? "justify-end" : "justify-start"}`}
+                                        >
+26> main & aside
+<div className="min-h-screen flex">
+  <aside className="w-64 bg-base-200 p-4 hidden md:block">
+  <main className="flex-1 bg-base-100 p-6">
