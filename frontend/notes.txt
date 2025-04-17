@@ -418,3 +418,12 @@ FormData - for large files
 
 27> ptc onlineUsers.includes(selectedUser._id)
 onlineUsers must be an array of user ids
+
+28>
+  // Create an array of 6 items for skeleton messages
+  const skeletonMessages = Array(6).fill(null);
+
+29> className coming from tailwind & daisyui, also daisyui have different components ready to use like chat bubble
+Source | Class Prefixes / Examples
+Tailwind | p-4, space-y-4, h-4, w-16, rounded-full, overflow-y-auto, size-10, bg-transparent, etc.
+DaisyUI | chat, chat-start, chat-end, avatar, chat-header, chat-bubble, skeleton 
