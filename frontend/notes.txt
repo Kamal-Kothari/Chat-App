@@ -427,3 +427,12 @@ onlineUsers must be an array of user ids
 Source | Class Prefixes / Examples
 Tailwind | p-4, space-y-4, h-4, w-16, rounded-full, overflow-y-auto, size-10, bg-transparent, etc.
 DaisyUI | chat, chat-start, chat-end, avatar, chat-header, chat-bubble, skeleton 
+
+30> set get
+Function | Purpose | Usage
+set | Update store state | set({ key: value }) or with callback
+get | Read current state | const value = get().key
+
+31> useRef
+const fileInputRef = useRef(null);
+//  fileInputRef: Direct reference to hidden file input.
