@@ -8,7 +8,9 @@ import cookieParser from 'cookie-parser'; // Middleware to parse cookies
 
 import { connectDB } from './lib/db.js'; // Import the connectDB function
 
-const app = express();
+// const app = express();
+import {app, server} from './lib/socket.js'; // Import the app and server from socket.js
+
 app.use(express.json()); // Middleware to parse JSON request bodies
 // app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded request bodies
 app.use(cookieParser()); // Middleware to parse cookies
@@ -22,7 +24,7 @@ app.use('/api/auth',authRoutes);
 app.use('/api/messages',messageRoutes);
 
 const port = process.env.PORT || 5001; // Use the port from environment variables or default to 5001
-app.listen(port , () => {
+server.listen(port , () => {
   console.log('Server is running on port : '+ port);
   connectDB(); // Call the connectDB function to connect to MongoDB
 });

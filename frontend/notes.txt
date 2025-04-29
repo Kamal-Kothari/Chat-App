@@ -436,3 +436,7 @@ get | Read current state | const value = get().key
 31> useRef
 const fileInputRef = useRef(null);
 //  fileInputRef: Direct reference to hidden file input.
+
+32> socket in server and client
+server socket needs to listen in real time for message sent by user1 
+client socket of user2 (other users) needs to listen in real time for new message that came in server from user1 .
