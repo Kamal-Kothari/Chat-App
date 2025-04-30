@@ -10,6 +10,10 @@ const io = new Server(server, {
     }
 });
 
+export function getReceiverSocketId(userId) {
+    return userSocketMap[userId]; // Retrieve the socket ID for the given user ID
+}
+
 const userSocketMap = {}; // Map to store user IDs and their corresponding socket IDs
 // {
 //     userId1: socketId1,

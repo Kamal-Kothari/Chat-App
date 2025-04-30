@@ -1,6 +1,7 @@
 import User from '../models/user.model.js';
 import Message from '../models/message.model.js';
 import cloudinary from '../lib/cloudinary.js';
+import { getReceiverSocketId, io } from '../lib/socket.js'; // Import the socket instance
 export const getUsersForSidebar = async (req, res) => {
     try {
         const users = await User.find({_id : {$ne : req.user._id}}).select('-password');
@@ -54,6 +55,9 @@ export const sendMessage = async (req, res) => {
         });
 
         await newMessage.save(); // Save the new message to the database
+
+        const receiverSocketId = getReceiverSocketId(receiverId); // Get the socket ID of the receiver
+        if(receiverSocketId) io.to(receiverSocketId).emit('message', newMessage); // Emit the message to the receiver's socket
 
         res.status(201).json(newMessage); // Send the newly created message as a response
 

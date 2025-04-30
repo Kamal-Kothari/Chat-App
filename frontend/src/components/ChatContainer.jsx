@@ -1,6 +1,6 @@
 import React from 'react'
 import { useChatStore } from '../store/useChatStore.js'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { Loader } from 'lucide-react'
 import ChatHeader from './ChatHeader.jsx'
 import MessageInput from './MessageInput.jsx'
@@ -9,14 +9,25 @@ import { formatMessageTime } from '../lib/utils.js'
 import { useAuthStore } from '../store/useAuthStore.js'
 
 const ChatContainer = () => {
-  const { selectedUser, getMessages, messages, isMessagesLoading } = useChatStore();
+  const { selectedUser, getMessages, messages, isMessagesLoading, subscribeToMessages, unsubscribeFromMessages } = useChatStore();
   const { authUser } = useAuthStore();
+  const messageEndRef = useRef(null);
 
   useEffect(() => {
     if (selectedUser) {
       getMessages(selectedUser._id);
+      subscribeToMessages(); // Subscribe to messages when a user is selected
+      return () => {
+        unsubscribeFromMessages(); // Unsubscribe when the component unmounts or user changes
+      };
     }
-  }, [selectedUser._id, getMessages])
+  }, [selectedUser._id, getMessages, subscribeToMessages, unsubscribeFromMessages]);
+
+  useEffect(() => {
+    if (messageEndRef.current && messages) {
+      messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
 
   if (isMessagesLoading) {
     return (
@@ -35,6 +46,7 @@ const ChatContainer = () => {
           <div
             key={message._id}
             className={`chat ${message.senderId === authUser._id ? "chat-end" : "chat-start"}`}
+            ref={messageEndRef}
           >
             <div className=" chat-image avatar">
               <div className="size-10 rounded-full border">
