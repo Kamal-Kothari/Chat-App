@@ -440,3 +440,6 @@ const fileInputRef = useRef(null);
 32> socket in server and client
 server socket needs to listen in real time for message sent by user1 
 client socket of user2 (other users) needs to listen in real time for new message that came in server from user1 .
+
+33>
+in dev, in strict mode every useEffect runs twice -> to test mount , unmount quickly

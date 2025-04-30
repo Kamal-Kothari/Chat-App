@@ -13,8 +13,10 @@ import { Navigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 
 const App = () => {
-  const {authUser, isCheckingAuth, checkAuth} = useAuthStore();
+  const {authUser, isCheckingAuth, checkAuth, onlineUsers} = useAuthStore();
   const {theme} = useThemeStore();
+
+  console.log({onlineUsers});
 
   useEffect(()=>{
     checkAuth();
