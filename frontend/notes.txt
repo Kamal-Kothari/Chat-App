@@ -443,3 +443,13 @@ client socket of user2 (other users) needs to listen in real time for new messag
 
 33>
 in dev, in strict mode every useEffect runs twice -> to test mount , unmount quickly
+
+34> deployment 
+react/frontend on 5173
+backend on 5001
+
+to deploy serving frontend also on 5001
+
+✅ Serve the React build from the Express server, and
+✅ Deploy the combined backend + frontend on Render (or another Node host).
+✅ Use MongoDB Atlas as your cloud database.
